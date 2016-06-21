@@ -1,0 +1,6 @@
+package physunit
+
+modules = PhysUnit
+        , PhysUnit.Even
+        , PhysUnit.Quantity
+        , PhysUnit.SIUnits
