@@ -11,6 +11,10 @@ import PhysUnit.SIUnits
 data Quantity : Type -> SIUnit -> Type where
   MkQuant : {u : SIUnit} -> a -> Quantity a u
 
+public export
+DQuantity : SIUnit -> Type
+DQuantity = Quantity Double
+
 infixr 5 =|
 (=|) : a -> (u : SIUnit) -> Quantity a u
 (=|) x _ = MkQuant x
