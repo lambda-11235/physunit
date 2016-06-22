@@ -49,6 +49,6 @@ partial
                else if n == 0 then 1
                else x * (pow' x (n - 1))
 
-sqrtQ : {auto ev : SIEven u} -> Quantity Double u
+sqrtQ : Quantity Double u -> {auto ev : SIEven u}
       -> Quantity Double (sqrtUnit {ev = ev} u)
 sqrtQ (MkQuant x) = MkQuant (sqrt x)

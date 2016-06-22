@@ -32,8 +32,3 @@ Note that quantities are constructed with =|, quantity operators begin with :,
 and unit operators end with :.
 
 **This library is experimental and may be subject to API breaking changes.**
-
-## sqrtQ
-
-sqrtQ currently only works on declared quantities. This means `sqrtQ (1 =|
-(Meter ^: 2))` will not work, but `let u = (1 =| (Meter ^: 2)) in sqrtQ u` does.
