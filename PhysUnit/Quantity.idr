@@ -8,6 +8,7 @@ import PhysUnit.SIUnits
 %default total
 
 
+||| A quantity is the combination of magnitude and a unit.
 data Quantity : Type -> SIUnit -> Type where
   MkQuant : {u : SIUnit} -> a -> Quantity a u
 
@@ -16,6 +17,7 @@ DQuantity : SIUnit -> Type
 DQuantity = Quantity Double
 
 infixr 5 =|
+||| Constructs a quantity.
 (=|) : a -> (u : SIUnit) -> Quantity a u
 (=|) x _ = MkQuant x
 
@@ -42,13 +44,17 @@ infixr 7 :/
 -- TODO: Make total
 infixr 8 :^
 partial
-(:^) : (Fractional a, Num a) => Quantity a u -> (n : Integer) -> Quantity a (u ^: n)
+(:^) : (Fractional a, Num a) => Quantity a u -> (n : Integer)
+  -> Quantity a (u ^: n)
 (:^) (MkQuant x) n = MkQuant (pow' x n)
   where
     pow' x n = if n < 0 then pow' (recip x) (-n)
                else if n == 0 then 1
                else x * (pow' x (n - 1))
 
+||| Takes the square root of a quantity.
+||| Requires evidence that the unit is composed of base units raised to even
+||| powers.
 sqrtQ : Quantity Double u -> {auto ev : SIEven u}
       -> Quantity Double (sqrtUnit {ev = ev} u)
 sqrtQ (MkQuant x) = MkQuant (sqrt x)

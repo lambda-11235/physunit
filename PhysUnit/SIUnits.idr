@@ -1,9 +1,9 @@
 
 module PhysUnit.SIUnits
 
-import PhysUnit.Even
+import public PhysUnit.Even
 
-import Data.Vect
+import public Data.Vect
 
 
 %access public export
@@ -16,16 +16,21 @@ import Data.Vect
 data SIUnit : Type where
   MkSIUnit : Vect 7 Integer -> SIUnit
 
+||| Proposition that an SI unit is composed of base units raised to an even
+||| power.
 data SIEven : SIUnit -> Type where
   MkSIEven : Even m -> Even kg -> Even s -> Even a -> Even k -> Even cd
            -> Even mol -> SIEven (MkSIUnit [m, kg, s, a, k, cd, mol])
 
+||| A unit that is the multiplicative identity.
 zeroUnit : SIUnit
 zeroUnit = MkSIUnit [0, 0, 0, 0, 0, 0, 0]
 
+||| The multiplicative inverse of a unit.
 invUnit : SIUnit -> SIUnit
 invUnit (MkSIUnit xs) = MkSIUnit $ map negate xs
 
+||| Takes the square root of a unit.
 sqrtUnit : (u : SIUnit) -> {auto ev : SIEven u} -> SIUnit
 sqrtUnit (MkSIUnit xs) = MkSIUnit $ map div2 xs
   where
@@ -53,18 +58,15 @@ infixr 8 ^:
     powUnit' x (S n) = x *: (powUnit' x n)
 
 
-showSIUnit : SIUnit -> String
-showSIUnit (MkSIUnit [m, kg, s, a, k, cd, mol])
-           = "m^" ++ (show m) ++ " "
-           ++ "kg^" ++ (show kg) ++ " "
-           ++ "s^" ++ (show s) ++ " "
-           ++ "a^" ++ (show a) ++ " "
-           ++ "k^" ++ (show k) ++ " "
-           ++ "cd^" ++ (show cd) ++ " "
-           ++ "mol^" ++ (show mol)
-
 Show SIUnit where
-  show u = showSIUnit u
+  show (MkSIUnit [m, kg, s, a, k, cd, mol])
+    = "m^" ++ (show m) ++ " "
+      ++ "kg^" ++ (show kg) ++ " "
+      ++ "s^" ++ (show s) ++ " "
+      ++ "a^" ++ (show a) ++ " "
+      ++ "k^" ++ (show k) ++ " "
+      ++ "cd^" ++ (show cd) ++ " "
+      ++ "mol^" ++ (show mol)
 
 
 

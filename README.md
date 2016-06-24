@@ -32,3 +32,8 @@ Note that quantities are constructed with =|, quantity operators begin with :,
 and unit operators end with :.
 
 **This library is experimental and may be subject to API breaking changes.**
+
+## Proofs About SI Units
+
+For convenience and testing purposes, the PhysUnit.SIProofs package contains
+some proofs of SI unit propositions.
