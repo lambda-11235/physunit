@@ -44,16 +44,13 @@ infixr 7 :/
 (:/) : (Fractional a) => Quantity a u1 -> Quantity a u2 -> Quantity a (u1 /: u2)
 (:/) (MkQuant x) (MkQuant y) = MkQuant (x / y)
 
--- TODO: Make total
 infixr 8 :^
-partial
 (:^) : (Fractional a, Num a) => Quantity a u -> (n : Integer)
   -> Quantity a (u ^: n)
 (:^) (MkQuant x) n = MkQuant (pow' x n)
   where
-    pow' x n = if n < 0 then pow' (recip x) (-n)
-               else if n == 0 then 1
-               else x * (pow' x (n - 1))
+    pow' x n = if n < 0 then Prelude.pow (recip x) (toNat $ -n)
+               else Prelude.pow x (toNat n)
 
 ||| Takes the square root of a quantity.
 ||| Requires evidence that the unit is composed of base units raised to even
