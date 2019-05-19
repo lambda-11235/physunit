@@ -63,19 +63,19 @@ siMultAssoc : (a : SIUnit) -> (b : SIUnit) -> (c : SIUnit)
 siMultAssoc (MkSIUnit xs) (MkSIUnit ys) (MkSIUnit zs)
   = cong (vectZipAddAssoc xs ys zs)
 
-||| Multiplying by the zeroUnit gives the original unit.
+||| Multiplying by the ZeroUnit gives the original unit.
 export
-siMultId : (a : SIUnit) -> (a *: SIUnits.zeroUnit) = a
+siMultId : (a : SIUnit) -> (a *: SIUnits.ZeroUnit) = a
 siMultId (MkSIUnit xs) = cong (vectZipAddId xs)
 
 ||| Multiplying a unit by its inverse gives the zero unit.
 export
-siInvMult : (a : SIUnit) -> (a *: (invUnit a)) = SIUnits.zeroUnit
+siInvMult : (a : SIUnit) -> (a *: (invUnit a)) = SIUnits.ZeroUnit
 siInvMult (MkSIUnit xs) = cong (vectZipAddInv xs)
 
 ||| Any unit raised to the zeroth power is equal to the zero unit.
 export
-siPowZero : (a : SIUnit) -> (a ^: 0) = SIUnits.zeroUnit
+siPowZero : (a : SIUnit) -> (a ^: 0) = SIUnits.ZeroUnit
 siPowZero _ = Refl
 
 ||| Any unit raised to the first power is equal to that unit.
@@ -86,7 +86,7 @@ siPowOne u = siMultId u
 ||| The square of unit equals that unit times itself.
 export
 siSqrEqMult : (a : SIUnit) -> (a ^: 2) = (a *: a)
-siSqrEqMult u = let lem1 = sym (siMultAssoc u u zeroUnit)
+siSqrEqMult u = let lem1 = sym (siMultAssoc u u ZeroUnit)
                     lem2 = siMultId (u *: u)
                 in trans lem1 lem2
 
