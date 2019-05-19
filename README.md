@@ -26,6 +26,9 @@ area = (5.4 =| Meter) :* (9.8 =| Meter)
 
 length2 : DQuantity Meter
 length2 = sqrtQ area
+
+aUnitlessNumber : DQuantity ZeroUnit
+aUnitlessNumber = unitless (2.0*pi)
 ```
 
 Note that quantities are constructed with =|, quantity operators begin with :,

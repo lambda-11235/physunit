@@ -23,8 +23,8 @@ data SIEven : SIUnit -> Type where
            -> Even mol -> SIEven (MkSIUnit [m, kg, s, a, k, cd, mol])
 
 ||| A unit that is the multiplicative identity.
-zeroUnit : SIUnit
-zeroUnit = MkSIUnit [0, 0, 0, 0, 0, 0, 0]
+ZeroUnit : SIUnit
+ZeroUnit = MkSIUnit [0, 0, 0, 0, 0, 0, 0]
 
 ||| The multiplicative inverse of a unit.
 invUnit : SIUnit -> SIUnit
@@ -54,7 +54,7 @@ infixr 8 ^:
 (^:) x n = if n < 0 then powUnit' (invUnit x) (toNat $ negate n)
            else powUnit' x (toNat n)
   where
-    powUnit' x Z = zeroUnit
+    powUnit' x Z = ZeroUnit
     powUnit' x (S n) = x *: (powUnit' x n)
 
 
@@ -99,10 +99,10 @@ Hertz : SIUnit
 Hertz = invUnit Second
 
 Radian : SIUnit
-Radian = zeroUnit
+Radian = ZeroUnit
 
 Steradian : SIUnit
-Steradian = zeroUnit
+Steradian = ZeroUnit
 
 Newton : SIUnit
 Newton = Kilogram *: Meter /: (Second ^: 2)

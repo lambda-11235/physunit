@@ -25,6 +25,9 @@ infixr 5 =|
     show (MkQuant x) = (show x) ++ " " ++ (show u)
 
 
+unitless : a -> Quantity a ZeroUnit
+unitless = MkQuant
+
 infixr 6 :+
 (:+) : (Num a) => Quantity a u -> Quantity a u -> Quantity a u
 (:+) (MkQuant x) (MkQuant y) = MkQuant (x + y)
